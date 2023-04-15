@@ -1,6 +1,6 @@
-import { Box, Button, Card, Grid, Paper, TextField, Typography } from '@mui/material'
+import { Box, Button, Divider, Grid, Link, Paper, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import { Route, Router, Routes } from 'react-router-dom'
+import AppLink from '../../shared/AppLink';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -10,70 +10,96 @@ export default function Login() {
     setUsername('');
     setPassword('');
   }
+
   const _handleLogin = async () => {
     try {
 
     } catch (err) {
 
+    } finally {
+      _handleClear();
     }
   }
 
   return (
-    <Paper
-      elevation={1}
+    <Box
       sx={{
-        alignItems: 'center',
-        padding: 2
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        placeItems: 'center',
+        justifyContent: 'center'
       }}
     >
-      <Grid
-        container
-        spacing={2}
-        columns={1}
+      <Paper
+        elevation={1}
         sx={{
           alignItems: 'center',
-          justifyContent: 'center'
+          padding: 2,
+          textAlign: 'center',
         }}
       >
-        <Grid item xs={8}>
-          <Typography fontStyle={'oblique'} color={'ButtonFace'}>Acesso ao sistema de gerenciamento</Typography>
-        </Grid>
+        <Typography
+          variant='overline'
+          sx={{
+            fontSize: '1rem',
+            color: '#888',
+            fontWeight: 300
+          }}
+        >Gerenciamento Data Loggers</Typography>
 
-        <Grid item xs={8}>
+        <Grid
+          container
+          columnGap={3}
+          sx={{
+            marginTop: '1.5rem'
+          }}
+        >
+
           <TextField
-            label='Login'
+            label='E-mail'
             value={username}
+            variant='standard'
             onChange={e => setUsername(e.target.value)}
           />
-        </Grid>
 
-        <Grid item xs={8}>
           <TextField
             label='Senha'
             value={password}
+            variant='standard'
             type='password'
             onChange={e => setPassword(e.target.value)}
           />
+
+          <Button
+            variant='text'
+            color='success'
+            disabled={!username.length || !password.length}
+            onClick={_handleLogin}
+          >Entrar</Button>
         </Grid>
 
-          <Grid item>
-            <Button
-              variant='contained'
-              color='secondary'
-              onClick={_handleClear}
-            >Limpar</Button>
-          </Grid>
+        <Divider sx={{
+          marginBottom: '1rem',
+          marginTop: '3rem',
+        }} />
 
-          <Grid item>
-            <Button
-              variant='contained'
-              color='success'
-              disabled={!username.length || !password.length}
-              onClick={_handleLogin}
-            >Entrar</Button>
-          </Grid>
-        
-      </Grid>
-    </Paper>
+        <Box
+          sx={{
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'space-evenly',
+            fontFamily: 'sans-serif',
+          }}
+        >
+          <AppLink uri='/dashboard' text='Recuperar senha' />
+          <Divider orientation='vertical' flexItem />
+          <AppLink uri='/support' text='Suporte' />
+
+        </Box>
+
+      </Paper >
+    </Box>
+
   )
 }
