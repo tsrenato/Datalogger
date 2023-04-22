@@ -1,6 +1,6 @@
 import { Box, Button, Divider, Grid, Link, Paper, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import AppLink from '../../shared/AppLink';
+import AppLink from '../../shared/components/AppLink';
 
 export default function Login() {
   const [username, setUsername] = useState('');

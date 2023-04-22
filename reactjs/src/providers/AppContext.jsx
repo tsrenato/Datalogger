@@ -2,16 +2,21 @@ import React, { createContext, useState } from 'react'
 
 export const AppContext = createContext({});
 
-export function AppContextProvider({children}) {
-    const [user, setUser] = useState({});
+export function AppContextProvider({ children }) {
+  const [user, setUser] = useState({});
+  const service = {
+    url: 'http://localhost',
+    port: 3000,
+  }
   return (
     <AppContext.Provider
-        value={{
-            user,
-            setUser,
-        }}
+      value={{
+        service,
+        user,
+        setUser,
+      }}
     >
-        {children}
+      {children}
     </AppContext.Provider>
   )
 }

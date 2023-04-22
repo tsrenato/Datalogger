@@ -6,6 +6,7 @@ app.use(express.urlencoded({ extended: true }))
 
 require('dotenv').config();
 require('./routes')(app, express);
+require('./config/cors')(app);
 
 
 async function start() {

@@ -1,5 +1,7 @@
-import { Box, Paper } from '@mui/material'
+import { Box, Paper, Typography } from '@mui/material'
 import React from 'react'
+import DataloggerTable from './components/tables/DataloggerTable'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function Dashboard() {
   return (
@@ -11,11 +13,18 @@ export default function Dashboard() {
     >
       <Box
         sx={{
+          display: 'flex',
           backgroundColor: 'white',
           alignItems: 'center',
-          padding: 2
+          padding: 2,
+          fontFamily: 'sans-serif',
+          color: '#5a5a5a'
         }}
-      >Header</Box>
+      >
+        <AccountCircleIcon
+          sx={{ marginRight: 1 }}
+        /> Usuário
+      </Box>
 
       <Box
         sx={{
@@ -32,7 +41,14 @@ export default function Dashboard() {
             minHeight: '85vh'
           }}
         >
-          Dashboard Content - Data Loggers Table
+          <Typography
+            variant='h4'
+            sx={{
+              marginBottom: 2,
+              color: '#5a5a5a'
+            }}
+          >Gerenciar Data Loggers</Typography>
+          <DataloggerTable />
         </Paper>
       </Box>
 

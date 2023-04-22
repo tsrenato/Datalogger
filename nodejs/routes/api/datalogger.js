@@ -1,10 +1,11 @@
 const DataLoggerController = require('../../src/app/api/contollers/datalogger');
+const respHeaders = require('../../src/support/middlewares/respHeaders');
 
 module.exports = app => {
-    app.get('/api/dataloggers', DataLoggerController.index);
-    app.get('/api/dataloggers/:id', DataLoggerController.show);
-    app.post('/api/dataloggers', DataLoggerController.store);
-    app.post('/api/dataloggers/log', DataLoggerController.log);
-    app.put('/api/dataloggers/:id', DataLoggerController.update);
-    app.delete('/api/dataloggers/:id', DataLoggerController.destroy);
+    app.get('/api/dataloggers', respHeaders, DataLoggerController.index);
+    app.get('/api/dataloggers/:id', respHeaders, DataLoggerController.show);
+    app.post('/api/dataloggers', respHeaders, DataLoggerController.store);
+    app.post('/api/dataloggers/log', respHeaders, DataLoggerController.log);
+    app.put('/api/dataloggers/:id', respHeaders, DataLoggerController.update);
+    app.delete('/api/dataloggers/:id', respHeaders, DataLoggerController.destroy);
 }
