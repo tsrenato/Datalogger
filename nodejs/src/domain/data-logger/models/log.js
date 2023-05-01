@@ -3,7 +3,7 @@ const { DB } = require("../../../../config/database");
 
 
 const options = {
-    tableName: 'dataloggers',
+    tableName: 'logs',
     createdAt: 'created_at',
     updatedAt: 'updated_at',
 };
@@ -13,6 +13,14 @@ const Log = DB.define('Log', {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
+    },
+    datalogger:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    hash: {
+      type: DataTypes.STRING,
+      allowNull: false,  
     },
     temperature: {
         type: DataTypes.STRING,

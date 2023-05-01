@@ -1,5 +1,6 @@
 const DataLogger = require("../../../domain/data-logger/models/datalogger");
 const Log = require("../../../domain/data-logger/models/log");
+const DataLoggerRepo = require("../../../domain/data-logger/repositories/dataloggerRepo");
 
 module.exports = {
     /**
@@ -9,7 +10,7 @@ module.exports = {
      */
     index: async (req, res) => {
         try {
-            const dataloggers = await DataLogger.findAll();
+            const dataloggers = await DataLoggerRepo.list();
             res.status(200).json(dataloggers);
         } catch (err) {
             console.log(err);
@@ -25,7 +26,7 @@ module.exports = {
      */
     show: async (req, res) => {
         try {
-            const datalogger = await DataLogger.findByPk(req.params.id);
+            const datalogger = await DataLoggerRepo.show(req.params.id);
             if (!datalogger) throw 404;
             res.status(200).json(datalogger);
         } catch (err) {
@@ -56,8 +57,8 @@ module.exports = {
                 name: req.body.name,
                 log_interval: req.body.interval,
             }
-            const datalogger = await DataLogger.create(data);
-            res.status(201).json(datalogger);
+            const datalogger = await DataLoggerRepo.create(data);
+            res.status(201).json({message: "Datalogger successfully created."});
         } catch (err) {
             console.log(err);
             res.status(500).json({
@@ -76,11 +77,7 @@ module.exports = {
                 name: req.body.name,
                 log_interval: req.body.interval,
             }
-            await DataLogger.update(data, {
-                where: {
-                    id: req.params.id,
-                }
-            });
+            await DataLoggerRepo.update(req.params.id, data);
             res.status(200).json({ message: 'Datalogger successfully updated.' });
         } catch (err) {
             console.log(err);
@@ -96,11 +93,7 @@ module.exports = {
      */
     destroy: async (req, res) => {
         try {
-            await DataLogger.destroy({
-                where: {
-                    id: req.params.id
-                }
-            });
+            await DataLoggerRepo.delete(req.params.id);
             res.status(200).json({ message: 'Datalogger successfully deleted.' });
         } catch (err) {
             console.log(err);
@@ -109,23 +102,4 @@ module.exports = {
             })
         }
     },
-    /**
-     * Records a temperature log.
-     * @param {*} req 
-     * @param {*} res 
-     */
-    log: async (req, res) => {
-        try {
-            const data = {
-                temperature: req.body.temperature,
-                latitude: req.body.latitude,
-                longitude: req.body.longitude,
-            }
-            await Log.create(data);
-            res.status(201).json({ message: 'Log successfully registered.' })
-        } catch (err) {
-            console.log(err);
-            res.status(500).json({ message: 'Operation failed.' })
-        }
-    }
 }

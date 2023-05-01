@@ -9,7 +9,7 @@ module.exports = {
      */
     index: async (req, res) => {
         try {
-            const users = User.findAll();
+            const users = await User.findAll();
             res.status(200).json(users);
         } catch (err) {
             res.status(500).json({ message: 'Operation failed.' });
@@ -35,7 +35,7 @@ module.exports = {
      */
     store: async (req, res) => {
         try {
-            const pwHash = bcrypt.hash(req.body.password, bcrypt.genSaltSync(8)); // use bcrypt.compare();
+            const pwHash = await bcrypt.hash(req.body.password, 10); // use bcrypt.compare();
             const data = {
                 email: req.body.email,
                 password: pwHash,
@@ -43,7 +43,7 @@ module.exports = {
             await User.create(data);
             res.status(201).json({ message: 'User successfully created.' });
         } catch (err) {
-            res.status(500).json({ message: 'Operation failed.' });
+            res.status(500).json({ message: 'Operation failed.', err });
         }
     },
     /**

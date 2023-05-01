@@ -22,7 +22,6 @@ const DataLogger = DB.define('DataLogger', {
         allowNull: false,
         defaultValue: 10,
     },
-
 }, options);
 
 // relations here

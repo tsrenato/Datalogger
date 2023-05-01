@@ -1,10 +1,11 @@
+const { DataTypes } = require("sequelize");
 const { DB } = require("../../../../config/database");
 
-
 const options = {
-    tableName: 'dataloggers',
+    tableName: 'users',
     createdAt: 'created_at',
     updatedAt: 'updated_at',
+    deletedAt: 'deleted_at',
 };
 
 const Users = DB.define('Users', {

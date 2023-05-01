@@ -1,4 +1,4 @@
-const { DB } = require('../config/database');
+const { DB } = require('./database');
 
 (async () => {
     await DB.sync();
