@@ -1,6 +1,5 @@
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
 import { AppContext } from '../../../../providers/AppContext';
 import TableSearch from './TableSearch';
 import TableActions from './TableActions';
@@ -8,25 +7,15 @@ import { formatString } from '../../../../shared/ecma/utils';
 
 export default function DataloggerTable() {
     const ctx = useContext(AppContext);
-    const [data, setData] = useState([]);
     const [filter, setFilter] = useState('');
-    const filteredData = data.filter(datalogger =>
+    const filteredData = ctx.dataloggers.filter(datalogger =>
         formatString(`${datalogger.name}`).indexOf(formatString(filter)) != -1 ||
         formatString(`${datalogger.log_interval}`).indexOf(formatString(filter)) != -1 ||
         formatString(`${datalogger.id}`).indexOf(formatString(filter)) != -1
     );
 
-    const _feedTable = async () => {
-        try {
-            const resp = await axios.get(ctx.service.url + ':' + ctx.service.port + '/api/dataloggers');
-            setData(resp.data);
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     useEffect(() => {
-        _feedTable();
+    ctx.getDataloggers();
         return () => {
             let ac = new AbortController();
             ac.abort();

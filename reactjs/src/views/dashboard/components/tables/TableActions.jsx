@@ -2,11 +2,11 @@ import { Box, IconButton, Tooltip } from '@mui/material'
 import SettingsIcon from '@mui/icons-material/Settings'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import React, { useState } from 'react'
+import Config from '../modals/Config';
 
 export default function TableActions({ row }) {
 
   const [settingsOpen, setSettingsOpen] = useState(false);
-
 
   return (
     <Box
@@ -28,6 +28,16 @@ export default function TableActions({ row }) {
           <SettingsIcon />
         </IconButton>
       </Tooltip>
+
+      {
+        settingsOpen
+          ? <Config
+            datalogger={row}
+            open={settingsOpen}
+            setOpen={setSettingsOpen}
+          />
+          : null
+      }
 
     </Box>
   )
