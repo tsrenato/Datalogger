@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../../../providers/AppContext';
 import TableSearch from './TableSearch';
 import TableActions from './TableActions';
-import { formatString } from '../../../../shared/ecma/utils';
+import { formatDate, formatString } from '../../../../shared/ecma/utils';
 
 export default function DataloggerTable() {
     const ctx = useContext(AppContext);
@@ -15,7 +15,7 @@ export default function DataloggerTable() {
     );
 
     useEffect(() => {
-    ctx.getDataloggers();
+        ctx.getDataloggers();
         return () => {
             let ac = new AbortController();
             ac.abort();
@@ -41,7 +41,7 @@ export default function DataloggerTable() {
                         <TableCell align='center'>id</TableCell>
                         <TableCell align='center'>Nome</TableCell>
                         <TableCell align='center'>Intervalo Programado</TableCell>
-                        <TableCell align='center'>Última Leitura</TableCell>
+                        {/* <TableCell align='center'>Última Leitura</TableCell> */}
                         <TableCell align='center'>Última Atualização</TableCell>
                         <TableCell align='center'>Ações</TableCell>
                     </TableRow>
@@ -56,8 +56,8 @@ export default function DataloggerTable() {
                                 <TableCell align='center' component='th' scope='row'>{datalogger.id}</TableCell>
                                 <TableCell align='center'>{datalogger.name}</TableCell>
                                 <TableCell align='center'>{datalogger.log_interval} min</TableCell>
-                                <TableCell align='center'>-90°C</TableCell>
-                                <TableCell align='center'>22/04/2023 - 14:30:45</TableCell>
+                                {/* <TableCell align='center'>-90°C</TableCell> */}
+                                <TableCell align='center'>{formatDate(datalogger.updated_at)}</TableCell>
                                 <TableCell align='center'><TableActions row={datalogger} /></TableCell>
                             </TableRow>
                         ))

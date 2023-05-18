@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const { DB } = require("../../../../config/database");
+const DataLogger = require("./datalogger");
 
 
 const options = {
@@ -14,13 +15,17 @@ const Log = DB.define('Log', {
         autoIncrement: true,
         primaryKey: true
     },
-    datalogger:{
+    datalogger: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references:{
+            model: DataLogger,
+            key: 'id',
+        }
     },
     hash: {
-      type: DataTypes.STRING,
-      allowNull: false,  
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     temperature: {
         type: DataTypes.STRING,
@@ -36,5 +41,18 @@ const Log = DB.define('Log', {
     },
 }, options);
 
+// Log.associate = models => {
+//     Log.belongsTo(models.DataLogger, {
+//         allowNull: false,
+//         foreignKey: 'datalogger',
+//         targetKey: 'id',
+//     });
+// }
+
+// Log.belongsTo(DataLogger, {
+//     allowNull: false,
+//     foreignKey: 'datalogger',
+//     targetKey: 'id',
+// });
 
 module.exports = Log;

@@ -26,4 +26,15 @@ const DataLogger = DB.define('DataLogger', {
 
 // relations here
 
+// DataLogger.associate = models => {
+//     DataLogger.hasMany(models.Log, {
+//         foreignKey: 'datalogger',
+//         as: 'logs',
+//     });
+// }
+
+// DataLogger.hasMany(Log, {
+//     foreignKey: 'datalogger',
+// });
+
 module.exports = DataLogger;

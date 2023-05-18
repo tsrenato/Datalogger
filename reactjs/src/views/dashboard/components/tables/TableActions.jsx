@@ -3,10 +3,12 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import React, { useState } from 'react'
 import Config from '../modals/Config';
+import LogsTable from './LogsTable';
 
 export default function TableActions({ row }) {
 
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [logsOpen, setLogsOpen] = useState(false);
 
   return (
     <Box
@@ -18,7 +20,7 @@ export default function TableActions({ row }) {
     >
 
       <Tooltip title='Visualizar Logs'>
-        <IconButton onClick={() => setSettingsOpen(true)}>
+        <IconButton onClick={() => setLogsOpen(true)}>
           <VisibilityIcon />
         </IconButton>
       </Tooltip>
@@ -35,6 +37,16 @@ export default function TableActions({ row }) {
             datalogger={row}
             open={settingsOpen}
             setOpen={setSettingsOpen}
+          />
+          : null
+      }
+
+      {
+        logsOpen
+          ? <LogsTable
+            datalogger={row}
+            open={logsOpen}
+            setOpen={setLogsOpen}
           />
           : null
       }
