@@ -19,7 +19,9 @@ module.exports = {
                             message: 'Operation failed.'
                         });
                     } else if (isMatch) {
-                        const token = jwt.sign(user, process.env('JWT_SECRET'));
+                        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
+                            expiresIn: 1800
+                        });
                         return res.status(200).json(token);
                     } else {
                         return res.status(401).json({
@@ -28,11 +30,11 @@ module.exports = {
                     }
                 });
             }
+
             if (!user) return res.status(404).json({
                 message: 'User not found.'
             });
 
-            res.status(200).json(dataloggers);
         } catch (err) {
             console.log(err);
             res.status(500).json({

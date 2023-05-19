@@ -1,25 +1,25 @@
 import { Box, Button, Divider, Grid, Link, Paper, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import AppLink from '../../shared/components/AppLink';
+import { useContext } from 'react';
+import { AppContext } from '../../providers/AppContext';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Login() {
+  const appCtx = useContext(AppContext);
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const _handleClear = () => {
-    setUsername('');
-    setPassword('');
-  }
+  const _handleLogin = () => appCtx.app.login({ email: username, password });
 
-  const _handleLogin = async () => {
-    try {
-
-    } catch (err) {
-
-    } finally {
-      _handleClear();
-    }
-  }
+  useEffect(()=> {
+    if(!Cookies.get('jwt')) navigate('dashboard');
+  }, []);
 
   return (
     <Box

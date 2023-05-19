@@ -3,6 +3,8 @@ module.exports = (app, express, path) => {
     /** API Routes */
     require('./api')(app, router);
 
+    require('./web')(app, router);
+
     app.use(express.static(path.resolve(__dirname, '../../reactjs/dist')));
 
     app.get('*', (req, res) => {

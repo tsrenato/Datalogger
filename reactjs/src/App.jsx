@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from './views/login/Index'
@@ -6,6 +5,7 @@ import Dashboard from './views/dashboard/Index'
 import { ThemeProvider } from '@mui/material'
 import { Theme } from './providers/Theme'
 import { AppContextProvider } from './providers/AppContext'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
+      <ToastContainer />
     </AppContextProvider>
   )
 }
