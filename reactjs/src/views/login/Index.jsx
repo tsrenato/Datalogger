@@ -10,16 +10,12 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const appCtx = useContext(AppContext);
-  const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const _handleLogin = () => appCtx.app.login({ email: username, password });
 
-  useEffect(()=> {
-    if(!Cookies.get('jwt')) navigate('dashboard');
-  }, []);
 
   return (
     <Box

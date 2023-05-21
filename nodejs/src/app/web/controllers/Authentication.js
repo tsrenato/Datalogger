@@ -42,5 +42,13 @@ module.exports = {
             });
         }
     },
-
+    validate: async (req, res) => {
+        try {
+            const token = jwt.verify(req.headers.authorization.replace('Bearer ', ''), process.env.JWT_SECRET);
+            return res.status(200).json({ email: token.email });
+        } catch (err) {
+            console.log(err);
+            return res.status(401).json({ message: 'Unauthorized.' });
+        }
+    }
 }

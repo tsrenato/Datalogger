@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Modal } from '@mui/material';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useContext } from 'react';
 import { AppContext } from '../../../../providers/AppContext';
@@ -14,7 +13,7 @@ export default function LogsTable({ datalogger, open, setOpen }) {
 
   const _fetchLogs = async () => {
     try {
-      const resp = await axios.get(ctx.service.url + ':' + ctx.service.port + '/api/logs/datalogger/' + datalogger.id);
+      const resp = await ctx.axios.get('/api/logs/datalogger/' + datalogger.id);
       setLogs(resp.data);
     } catch (err) {
       toast.error('Falha ao buscar os logs.');

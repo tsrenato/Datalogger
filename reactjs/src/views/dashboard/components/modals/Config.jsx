@@ -1,7 +1,6 @@
 import { Button, Modal, Paper, TextField, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../../../providers/AppContext';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 
 export default function Config({ datalogger, open, setOpen }) {
@@ -10,7 +9,7 @@ export default function Config({ datalogger, open, setOpen }) {
 
     const _saveConfig = async () => {
         try {
-            const resp = await axios.put(ctx.service.url + ':' + ctx.service.port + '/api/dataloggers/' + datalogger.id, {
+            const resp = await ctx.axios.put('/api/dataloggers/' + datalogger.id, {
                 name: config.name,
                 interval: parseInt(config.log_interval),
             });

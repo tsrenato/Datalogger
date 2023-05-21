@@ -9,9 +9,9 @@ import { ToastContainer } from 'react-toastify'
 
 function App() {
   return (
-    <AppContextProvider>
-      <ThemeProvider theme={Theme}>
-        <BrowserRouter>
+    <BrowserRouter>
+      <AppContextProvider>
+        <ThemeProvider theme={Theme}>
           <Routes>
             <Route
               path='/'
@@ -22,10 +22,10 @@ function App() {
               element={<Dashboard />}
             />
           </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
-      <ToastContainer />
-    </AppContextProvider>
+        </ThemeProvider>
+        <ToastContainer />
+      </AppContextProvider>
+    </BrowserRouter>
   )
 }
 
